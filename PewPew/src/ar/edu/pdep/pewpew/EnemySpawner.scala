@@ -8,14 +8,17 @@ class EnemySpawner(spawnCoolDown:Double, waveLength:Int, waveCooldown:Double) ex
   var spawnX:() => Double = () => PewPewGame.randomizer.nextDouble * this.getGame().getDisplayWidth().toDouble
   var spawnY:() => Double = () => -ResourceManager.ENEMY_SHIP_SPRITE.getHeight()
   
-  var currentCoolDown = spawnCoolDown
+  var currentMaxCoolDown = spawnCoolDown
+  var currentCoolDown = currentMaxCoolDown
 
   override def update(state: DeltaState): Unit = {
     currentCoolDown -= state.getDelta
     
     if(currentCoolDown <= 0) {
       this.createWave(state)
-      currentCoolDown = spawnCoolDown
+      currentCoolDown = currentMaxCoolDown
+      //TODO: Hardcoded
+      currentMaxCoolDown = (currentMaxCoolDown - 0.1) max 2
     }
   }
   

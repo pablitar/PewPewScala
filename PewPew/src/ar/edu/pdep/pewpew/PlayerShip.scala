@@ -1,24 +1,28 @@
 package ar.edu.pdep.pewpew
 
-import com.uqbar.vainilla.appearances.Rectangle
-import java.awt.Color
-import com.uqbar.vainilla.events.constants.Key
 import com.uqbar.vainilla.DeltaState
+import com.uqbar.vainilla.events.constants.Key
 
-class PlayerShip(scene:PewPewGameScene) extends MovableWithKeyboard[PewPewGameScene] with CircularGameComponent {
+class PlayerShip(scene: PewPewGameScene) extends MovableWithKeyboard[PewPewGameScene] with CircularGameComponent {
 
   val coolDownTime = 0.12
 
   var firing = false
   var cooldown = 0.0
 
-  this.setZ(100)
+  val maxHealth = 100
+  val maxShield = 50.0
+  val shieldRegenRate = 3.0
+
+  var health = maxHealth
+  var shield = maxShield
+
+  this.setZ(2)
   this.setScene(scene)
   this.setAppearance(ResourceManager.SPACE_SHIP_SPRITE)
-  
-  this.setX(this.getGame.getDisplayWidth / 2)
-  this.setY(this.getGame.getDisplayHeight * 0.8)  
 
+  this.setX(this.getGame.getDisplayWidth / 2)
+  this.setY(this.getGame.getDisplayHeight * 0.8)
 
   withEvents(
     List(
@@ -36,7 +40,13 @@ class PlayerShip(scene:PewPewGameScene) extends MovableWithKeyboard[PewPewGameSc
       this.coolDownAndFire(state.getDelta)
     }
 
+    this.regenShield(state: DeltaState)
+
     this.cooldown = (this.cooldown - state.getDelta) max 0
+  }
+
+  def regenShield(state: DeltaState): Unit = {
+    this.shield = (this.shield + shieldRegenRate * state.getDelta) min maxShield
   }
 
   def coolDownAndFire(delta: Double): Unit = {
@@ -61,8 +71,21 @@ class PlayerShip(scene:PewPewGameScene) extends MovableWithKeyboard[PewPewGameSc
   def getCenterX: Double = {
     this.getX + this.getAppearance.getWidth / 2
   }
-  
-  def takeDamage(damage:Int) = {
-    
+
+  def takeDamage(damage: Int) = {
+    val damageToHealth = (damage - this.shield) max 0
+    this.shield = (shield - damage) max 0
+
+    this.health = (this.health - damageToHealth).toInt max 0
+
+    if (this.health <= 0) {
+      this.death
+    }
+  }
+
+  def death: Unit = {
+    this.scene.addComponent(ImpactEffect.explosion(this))
+    this.scene.gameOver
+    this.destroy
   }
 }

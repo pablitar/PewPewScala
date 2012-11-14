@@ -19,7 +19,7 @@ class EnemyShip(health: Int, x: Double, y: Double) extends RectangularGameCompon
 
   this.addCollisionEvent((CollisionGroups.PLAYER,
     (aPlayer: CollisionDrivenGameComponent) => {
-      aPlayer.asInstanceOf[PlayerShip].takeDamage(health)
+      aPlayer.asInstanceOf[PlayerShip].takeDamage(currentHealth)
       this.explode
     }))
 
@@ -43,8 +43,10 @@ class EnemyShip(health: Int, x: Double, y: Double) extends RectangularGameCompon
     this
   }
 
+  //TODO: Listener
   def explode: Unit = {
     this.getScene.addComponent(ImpactEffect.explosion(this))
+    this.getScene.sumScore
     this.destroy()
   }
 
