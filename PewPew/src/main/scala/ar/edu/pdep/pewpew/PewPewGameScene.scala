@@ -22,7 +22,7 @@ class PewPewGameScene(game: Game) extends GameScene {
   this.addComponent(new HealthBar(playerShip, 10, 10))
   this.addComponent(new ShieldBar(playerShip, 10, 40))
 
-  this.addComponent(new EnemySpawner(8.0, 10, 0.5))
+  this.addComponent(new EnemySpawner(2.0, 10, 0.4))
   
   val scoreDisplay = new ScoreDisplay(this)
   

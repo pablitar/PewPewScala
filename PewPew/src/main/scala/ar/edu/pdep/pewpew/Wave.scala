@@ -11,7 +11,7 @@ class Wave(x: Double, y: Double, waveLength: Int, waveCooldown: Double) extends 
   override def update(state: DeltaState): Unit = {
     currentCooldown -= state.getDelta
     if (currentCooldown <= 0) {
-      this.getScene.addComponent(EnemyShip.default(x, y))
+      this.getScene.addComponent(createShip)
       currentCooldown = waveCooldown
       toSpawn -= 1
       if (toSpawn <= 0) {
@@ -19,5 +19,7 @@ class Wave(x: Double, y: Double, waveLength: Int, waveCooldown: Double) extends 
       }
     } 
   }
+  
+  def createShip = EnemyShip.default(x, y)
 
 }

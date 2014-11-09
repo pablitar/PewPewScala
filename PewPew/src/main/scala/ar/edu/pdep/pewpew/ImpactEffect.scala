@@ -3,9 +3,10 @@ package ar.edu.pdep.pewpew
 import com.uqbar.vainilla.GameScene
 import com.uqbar.vainilla.DeltaState
 import com.uqbar.vainilla.appearances.Appearance
+import com.uqbar.vainilla.GameComponent
 
 object ImpactEffect {
-  def laserShotImpact(shot: LaserShot) = new ImpactEffect(shot, ResourceManager.LASERSHOT_IMPACT_SPRITE, 0.3)
+  def laserShotImpact[T <: GameScene](shot: SpeedyComponent[T]) = new ImpactEffect(shot, ResourceManager.LASERSHOT_IMPACT_SPRITE, 0.3)
   def explosion[T <: GameScene](component: SpeedyComponent[T]) = new ImpactEffect(component, ResourceManager.EXPLOSION.copy(), 0.5)
 }
 

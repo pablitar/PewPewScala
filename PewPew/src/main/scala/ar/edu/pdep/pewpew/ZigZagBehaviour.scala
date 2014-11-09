@@ -1,25 +1,11 @@
 package ar.edu.pdep.pewpew
 
-import com.uqbar.vainilla.DeltaState
+import ar.edu.pdep.pewpew.Vector2D.toVector2D
 
-class ZigZagBehaviour(ship: EnemyShip, targetSpeed: Vector2D) extends NullBehaviour(ship) {
-
+class ZigZagBehaviour(ship: EnemyShip, targetSpeed: Vector2D) extends MovementBehaviour(ship) {
   var xDirection = if (PewPewGame.randomizer.nextDouble >= 0.5) 1 else -1
-
-  override def doUpdate(state: DeltaState): Boolean = {
-    this.removeIfOutsideTheScreen
-    ship.speed = this.getSpeedForShip
-    ship.applySpeed(state)
-    true
-  }
-
-  def removeIfOutsideTheScreen: Unit = {
-    if((targetSpeed.x2 >= 0 && ship.isBelowTheScreen) || (targetSpeed.x2 <= 0 && ship.isOverTheScreen)) {
-      ship.destroy
-    }
-  }
-
-  def getSpeedForShip: Vector2D = {
+  
+  def getSpeedForShip = {
     if (ship.getX <= ship.getMinX) {
       xDirection = 1
     } else if (ship.getX >= ship.getMaxX) {
@@ -28,5 +14,4 @@ class ZigZagBehaviour(ship: EnemyShip, targetSpeed: Vector2D) extends NullBehavi
 
     (targetSpeed.x1 * xDirection, targetSpeed.x2)
   }
-
 }

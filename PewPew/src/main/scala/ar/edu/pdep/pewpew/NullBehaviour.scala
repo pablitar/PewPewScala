@@ -4,6 +4,7 @@ import com.uqbar.vainilla.DeltaState
 
 object Behaviour {
   def zigZagMovement(speed:Vector2D) = (aShip:EnemyShip) => new ZigZagBehaviour(aShip, speed)
+  def straightMovement(speed: Double, xSpeed:Double = 0) = (aShip:EnemyShip) => new StraightBehaviour(aShip, (xSpeed, speed))
 }
 
 class NullBehaviour(val ship: EnemyShip) {

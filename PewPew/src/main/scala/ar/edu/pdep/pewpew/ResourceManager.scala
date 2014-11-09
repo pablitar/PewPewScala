@@ -9,6 +9,7 @@ object ResourceManager {
 
   val SPACE_SHIP_SPRITE = Sprite.fromImage("/png/player.png").scale(SPRITES_SCALE).center();
   val LASERSHOT_SPRITE = Sprite.fromImage("/png/laserRed.png").scale(SPRITES_SCALE).center();
+  val MISSILE_SPRITE  = Sprite.fromImage("/png/meteorSmall.png").scale(SPRITES_SCALE).center();
   val LASERSHOT_IMPACT_SPRITE = Sprite.fromImage("/png/laserRedShot.png").scale(SPRITES_SCALE).center();
 
   val EXPLOSION_SPRITE = Sprite.fromImage("/png/explosion.png").scale(SPRITES_SCALE).center();
@@ -19,6 +20,7 @@ object ResourceManager {
       EXPLOSION_SPRITE.rotate(Pi).center())
 
   val ENEMY_SHIP_SPRITE = Sprite.fromImage("/png/enemyShip.png").scale(SPRITES_SCALE).center();
+  val ENEMY_UFO_SPRITE = Sprite.fromImage("/png/enemyUFO.png").scale(SPRITES_SCALE).center();
 
   def initializeResources: Unit = {
 
