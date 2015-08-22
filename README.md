@@ -5,7 +5,7 @@ Este proyecto es un juego de ejemplo implementado en Vainilla.
 
 La estructura incluye:
 - [Vainilla](vainilla) | Versión de vainilla con la que fue hecho el juego
-- [El Juego en Sí][PewPew] | Código del juego en Scala
+- [El Juego en Sí](PewPew) | Código del juego en Scala
 
 
 Para correr desde consola:
