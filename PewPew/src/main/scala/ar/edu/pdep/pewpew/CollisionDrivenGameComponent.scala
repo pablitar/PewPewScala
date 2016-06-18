@@ -1,8 +1,8 @@
 package ar.edu.pdep.pewpew
 
 import com.uqbar.vainilla.GameComponent
-
 import ar.edu.pdep.pewpew.CollisionGroup.toFunction
+import java.awt.Graphics2D
 
 object CollisionDrivenGameComponent {
   val detector = com.uqbar.vainilla.colissions.CollisionDetector.INSTANCE
@@ -27,5 +27,16 @@ trait CollisionDrivenGameComponent extends RichGameComponent[PewPewGameScene] {
   def hasCollidedWithCircle(x: Double, y: Double, r: Int): Boolean
 
   def hasCollidedWithRect(x: Double, y: Double, w: Int, h:Int): Boolean
+  
+  val debugHitbox = false
+  
+  override def render(graphics: Graphics2D) = {
+    super.render(graphics)
+    if(debugHitbox) {
+      this.renderHitbox(graphics)
+    }
+  }
+
+  def renderHitbox(graphics: Graphics2D) = {}
   
 }

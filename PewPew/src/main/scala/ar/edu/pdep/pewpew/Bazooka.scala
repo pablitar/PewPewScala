@@ -4,7 +4,7 @@ class Bazooka(scene: PewPewGameScene, ship: PlayerShip) extends Weapon {
   
   setScene(scene)
   
-  val coolDownTime = 1d
+  val coolDownTime = 0.1d
 
   def doFire = {
     //TODO: Repite con laserShot

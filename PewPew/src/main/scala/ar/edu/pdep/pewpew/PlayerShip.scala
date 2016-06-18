@@ -2,6 +2,7 @@ package ar.edu.pdep.pewpew
 
 import com.uqbar.vainilla.DeltaState
 import com.uqbar.vainilla.events.constants.Key
+import com.uqbar.vainilla.appearances.Circle
 
 class PlayerShip(scene: PewPewGameScene) extends MovableWithKeyboard[PewPewGameScene] with CircularGameComponent {
 
@@ -22,14 +23,18 @@ class PlayerShip(scene: PewPewGameScene) extends MovableWithKeyboard[PewPewGameS
   this.setZ(2)
   this.setScene(scene)
   this.setAppearance(ResourceManager.SPACE_SHIP_SPRITE)
+  
+  override def getR:Int = ((this.getWidth min this.getHeight) / 8).toInt 
 
   this.setX(this.getGame.getDisplayWidth / 2)
   this.setY(this.getGame.getDisplayHeight * 0.8)
+  
+  override val debugHitbox = true
 
   withEvents(
     List(
+    		(release(Key.CTRL), () => this.fireReleased),
       (Key.CTRL, () => this.firePressed),
-      (release(Key.CTRL), () => this.fireReleased),
       (Key.TAB, () => this.swapWeapon)))
 
   def swapWeapon {

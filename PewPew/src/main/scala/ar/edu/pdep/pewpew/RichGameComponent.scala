@@ -39,5 +39,7 @@ trait RichGameComponent[T <: GameScene] extends GameComponent[T] {
 
   def getWidth = this.getAppearance.getWidth
   def getHeight = this.getAppearance.getHeight
+  
+  def position = Vector2D(getX, getY)
 
 }

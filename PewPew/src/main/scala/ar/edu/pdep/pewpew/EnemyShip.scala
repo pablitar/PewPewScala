@@ -54,6 +54,8 @@ class EnemyShip(health: Int, x: Double, y: Double, app: Appearance = ResourceMan
 
   override def getMaxY = Double.PositiveInfinity
   override def getMinY = Double.NegativeInfinity
+  
+//  override val debugHitbox = true
 
 }
 
